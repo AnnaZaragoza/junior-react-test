@@ -7,7 +7,7 @@ const client = new ApolloClient({
 client
   .query({
     query: gql`
-      query ProductNames {
+      query ProductsList {
         category {
           name
           products {

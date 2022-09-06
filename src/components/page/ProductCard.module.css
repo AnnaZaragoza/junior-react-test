@@ -18,12 +18,6 @@
   width: 354px;
   height: 330px;
   margin: 16px auto 0;
-
-  /* Inside auto layout */
-  /* flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0; */
 }
 
 .content {
