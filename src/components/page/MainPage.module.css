@@ -1,0 +1,14 @@
+.main {
+  position: absolute;
+  width: 1240px;
+  top: 80px;
+  left: 100px;
+}
+
+.title {
+  font-family: var(--f-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 160%;
+}
