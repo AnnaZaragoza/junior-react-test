@@ -7,21 +7,23 @@ class ProductCard extends Component {
   constructor() {
     super();
     this.state = {
-      name: storePLP.name,
+      image: "first image from array",
+      name: "storePLP.name",
+      symbol: "storePLP.symbol",
+      amount: "storePLP.amount",
     };
-  }
-
-  productStateHandler() {
-    this.setState(this.state);
   }
 
   render() {
     return (
       <div className={styles.card}>
-        <img className={styles.image}>{this.state.name}</img>
+        <img className={styles.image} src={this.state.image}></img>
         <div className={styles.content}>
-          <h4 className={styles.title}>Apollo Running Short</h4>
-          <p className={styles.price}>$50.00</p>
+          <h4 className={styles.title}>{this.state.name}</h4>
+          <p className={styles.price}>
+            {this.state.symbol}
+            {this.state.amount}
+          </p>
         </div>
       </div>
     );

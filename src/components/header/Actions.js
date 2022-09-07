@@ -16,6 +16,7 @@ class Actions extends Component {
         <div className={styles["currencies-list"]}>
           <a className={styles["currencies-list-item"]}>$ USD</a>
           <a className={styles["currencies-list-item"]}>E Euro</a>
+          <a className={styles["currencies-list-item"]}>P PLN</a>
         </div>
 
         <button className={styles["shopping-cart"]}>

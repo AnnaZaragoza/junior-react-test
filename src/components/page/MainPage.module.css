@@ -1,8 +1,6 @@
 .main {
-  position: absolute;
-  width: 1240px;
-  top: 80px;
-  left: 100px;
+  width: 1440px;
+  margin: 0 auto;
 }
 
 .title {
@@ -11,4 +9,23 @@
   font-weight: 400;
   font-size: 42px;
   line-height: 160%;
+
+  padding-left: 100px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .main {
+    width: 100%;
+  }
+
+  .title {
+    padding-left: 5%;
+  }
+}
+
+@media only screen and (max-width: 835px) {
+  .title {
+    text-align: center;
+    padding-left: 0;
+  }
 }

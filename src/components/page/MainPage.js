@@ -7,7 +7,7 @@ class MainPage extends Component {
   render() {
     return (
       <main className={styles.main}>
-        <h1 className={styles.title}>Category name</h1>
+        <h2 className={styles.title}>Category name</h2>
         <PLP />
       </main>
     );
