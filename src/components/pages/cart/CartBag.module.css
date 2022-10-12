@@ -1,0 +1,52 @@
+.container {
+  padding: 0 5%;
+  font-family: var(--f-primary);
+  font-style: normal;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+
+  margin-bottom: 55px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.summary {
+  margin-top: 32px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+td {
+  padding: 4px 0;
+}
+
+td:last-child {
+  padding-left: 5px;
+  font-weight: 700;
+}
+
+.button {
+  width: 279px;
+  height: 43px;
+  margin-top: 16px;
+}
+
+hr {
+  border: 1px solid #e5e5e5;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1340px) {
+  .list {
+    width: 100%;
+  }
+}

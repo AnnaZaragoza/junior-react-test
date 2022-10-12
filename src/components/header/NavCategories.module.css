@@ -1,37 +1,37 @@
 .navigation {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 
   padding-left: 10%;
 }
 
-.navigation-button {
-  width: 97px;
-  height: 56px;
-
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-
+.button {
+  text-decoration: none;
   font-family: var(--f-primary);
   font-style: normal;
+  color: var(--c-text);
+
+  padding: 0 20px 10px;
+
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
-  color: var(--c-text);
 
   border-bottom: 2px solid transparent;
   transition: 300ms all;
 }
 
-.navigation-button:hover {
-  font-weight: 600;
+.button:hover,
+.button:active,
+.active {
   color: var(--c-primary);
   border-bottom: 2px solid var(--c-primary);
+
+  font-weight: 600;
 }
 
 @media only screen and (max-width: 700px) {

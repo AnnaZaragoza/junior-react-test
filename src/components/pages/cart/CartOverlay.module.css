@@ -1,0 +1,71 @@
+.title {
+  font-family: var(--f-primary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+
+  color: var(--c-text);
+  margin-bottom: 32px;
+}
+
+.list {
+  font-family: var(--f-primary);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  max-height: 400px;
+  overflow-y: scroll;
+
+  color: var(--c-text);
+}
+
+.cart {
+  font-size: 16px;
+}
+
+.total {
+  margin-top: 32px;
+
+  font-family: var(--f-primary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  color: var(--c-text);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions {
+  margin-top: 32px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 13px;
+}
+
+.button {
+  text-decoration: none;
+  font-family: var(--f-primary);
+
+  border: 1px solid var(--c-text);
+  color: var(--c-text);
+  background-color: #ffffff;
+
+  cursor: pointer;
+  text-align: center;
+  padding: 13px 0;
+
+  transition: all 300ms ease-in;
+  width: 100%;
+}
+
+.button:hover,
+.button:active {
+  border: 1px solid transparent;
+  color: #ffffff;
+  background-color: var(--c-primary);
+}

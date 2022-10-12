@@ -1,0 +1,168 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin: 0 5%;
+}
+
+.images {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 60%;
+}
+
+.small-images {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.image {
+  width: 80%;
+  height: auto;
+  margin-left: 10px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 40%;
+
+  font-family: var(--f-primary);
+  font-style: normal;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+}
+
+.title-description {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+
+  margin-top: 16px;
+}
+
+.attributes {
+  margin-top: 43px;
+}
+
+.sizes-size {
+  border: 1px solid black;
+  width: 63px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  margin-top: 7px;
+}
+
+.color {
+  font-family: var(--f-secondary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+
+  margin-top: 24px;
+}
+
+.colors {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  margin-bottom: 32px;
+}
+
+.colors-color {
+  border: 1px solid black;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 45px;
+  margin-top: 10px;
+}
+
+.price {
+  font-family: var(--f-secondary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+
+  margin-top: 36px;
+}
+
+.amount {
+  font-family: var(--f-primary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+
+  margin-top: 10px;
+}
+
+.button {
+  margin-top: 20px;
+}
+
+.small-description {
+  font-family: var(--f-secondary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+  text-align: left;
+
+  margin-top: 40px;
+}
+
+@media only screen and (max-width: 1340px) {
+  .item {
+    flex-direction: column;
+  }
+
+  .images {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .small-images {
+    flex-direction: row;
+  }
+
+  .image {
+    width: 50%;
+    margin-left: 0;
+  }
+
+  .description {
+    margin-top: 40px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .description {
+    width: 100%;
+  }
+
+  .image {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .images {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,19 @@
+.button {
+  position: absolute;
+  transform: translate(302px, -112px);
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 4px 11px rgba(29, 31, 34, 0.1);
+  border: 1px solid transparent;
+  transition: all 300ms ease;
+}
+
+.icon {
+  width: 24px;
+  height: 21.6px;
+}

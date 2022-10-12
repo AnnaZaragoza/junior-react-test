@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { NavLink } from "react-router-dom";
 
 import styles from "./NavCategories.module.css";
 
@@ -6,9 +7,28 @@ class NavCategories extends Component {
   render() {
     return (
       <nav className={styles.navigation}>
-        <button className={styles["navigation-button"]}>ALL</button>
-        <button className={styles["navigation-button"]}>CLOTHES</button>
-        <button className={styles["navigation-button"]}>TECH</button>
+        <NavLink
+          to="/products"
+          exact
+          className={styles.button}
+          activeClassName={styles.active}
+        >
+          ALL
+        </NavLink>
+        <NavLink
+          to={`/products/clothes`}
+          className={styles.button}
+          activeClassName={styles.active}
+        >
+          CLOTHES
+        </NavLink>
+        <NavLink
+          to={`/products/tech`}
+          className={styles.button}
+          activeClassName={styles.active}
+        >
+          TECH
+        </NavLink>
       </nav>
     );
   }

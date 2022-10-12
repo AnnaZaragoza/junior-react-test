@@ -1,0 +1,10 @@
+.main {
+  width: 1440px;
+  margin: 80px auto;
+}
+
+@media only screen and (max-width: 1340px) {
+  .main {
+    width: 100%;
+  }
+}

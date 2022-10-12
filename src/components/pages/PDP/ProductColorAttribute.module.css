@@ -1,0 +1,30 @@
+.attribute {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-family: var(--f-secondary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+
+  margin-top: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  text-align: center;
+  margin-top: 7px;
+}
+
+.colors {
+  width: 32px;
+  height: 32px;
+}

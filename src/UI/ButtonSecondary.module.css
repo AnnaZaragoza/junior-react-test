@@ -1,0 +1,19 @@
+.button {
+  font-family: var(--f-primary);
+
+  border: 1px solid var(--c-text);
+  color: var(--c-text);
+  background-color: #ffffff;
+
+  cursor: pointer;
+  text-align: center;
+  padding: 13px 0;
+
+  transition: all 300ms ease-in;
+}
+
+.button:hover {
+  border: 1px solid transparent;
+  color: #ffffff;
+  background-color: var(--c-primary);
+}

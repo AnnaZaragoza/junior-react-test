@@ -1,0 +1,20 @@
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-family: var(--f-primary);
+  font-style: normal;
+  color: var(--c-text);
+
+  padding-bottom: 10px;
+
+  border-bottom: 2px solid transparent;
+  transition: 300ms all;
+}
+
+.button:hover,
+.button:active {
+  color: var(--c-primary);
+  border-bottom: 2px solid var(--c-primary);
+}

@@ -1,6 +1,16 @@
 @font-face {
   font-family: "Raleway";
-  src: "./src/fonts/raleway/Raleway-Regular.ttf";
+  src: url("../src/fonts/raleway/static/Raleway-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Roboto-Condensed";
+  src: url("../src/fonts/roboto-condensed/RobotoCondensed-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Source-Sans-Pro";
+  src: url("../src/fonts/source-sans-pro/SourceSansPro-Regular.ttf");
 }
 
 :root {
@@ -8,10 +18,19 @@
   --c-background: #ffffff;
   --c-primary: #5ece7b;
 
-  --f-primary: "Raleway", "Arial", sans-serif;
+  --f-primary: "Raleway";
+  --f-secondary: "Roboto-Condensed";
+  --f-tertiary: "Source-Sans-Pro";
 }
 
-body {
+* {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
+
+  transition: all 300ms ease;
+}
+
+ul {
+  list-style-type: none;
 }
