@@ -14,7 +14,7 @@ class ProductCard extends Component {
     super();
     this.state = {
       cartBadgeButtonIsShown: false,
-      productAmount: 1,
+      newProductAmount: "",
       newPriceAmount: "",
     };
   }
@@ -58,7 +58,7 @@ class ProductCard extends Component {
         this.state.newPriceAmount === ""
           ? this.props.priceAmount
           : this.state.newPriceAmount,
-      amount: this.state.productAmount,
+      amount: this.props.amount,
       brand: this.props.brand,
       description: this.props.description,
       attributes: this.props.attributes,

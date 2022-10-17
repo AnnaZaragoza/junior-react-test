@@ -27,6 +27,10 @@ class CartOverlay extends Component {
     else this.setState({ modalIsShown: true });
   }
 
+  getProductAmount() {
+    console.log(this.props.productAmount);
+  }
+
   render() {
     const cartItemsList = this.context.cartItems.map(
       (product) =>

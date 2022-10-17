@@ -21,7 +21,6 @@ class ProductProvider extends Component {
     const currentCurrency = this.state.cartItems
       .map((item) => item.priceCurrencySymbol)
       .filter((v, i, p) => p.indexOf(v) === i);
-    console.log(currentCurrency[1]);
 
     // if (currentCurrency[1]) console.log("Currency has change!!");
 

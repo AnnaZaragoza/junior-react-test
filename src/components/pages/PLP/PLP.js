@@ -65,6 +65,7 @@ class PLP extends Component {
             attributes={product.attributes}
             images={product.images}
             inStock={product.inStock}
+            amount={1}
           />
         ))
     );
