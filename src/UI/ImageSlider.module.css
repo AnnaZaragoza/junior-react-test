@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+  width: 200px;
+  height: auto;
+  margin: 24px 0;
+}
+
+.image {
+  width: 200px;
+}
+
+.arrows {
+  position: absolute;
+  display: flex;
+  gap: 8px;
+  bottom: 0;
+  right: 0;
+
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.arrow-left {
+  width: 24px;
+  height: 24px;
+
+  background-color: rgba(0, 0, 0, 0.73);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.arrow-right {
+  width: 24px;
+  height: 24px;
+
+  background-color: rgba(0, 0, 0, 0.73);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.arrow-left:hover,
+.arrow-right:hover {
+  background-color: black;
+}

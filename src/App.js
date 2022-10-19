@@ -28,7 +28,8 @@ class App extends Component {
   }
 
   showCartHandler() {
-    this.setState({ cartIsShown: true });
+    if (this.state.cartIsShown === false) this.setState({ cartIsShown: true });
+    else this.setState({ cartIsShown: false });
   }
 
   hideCartHandler() {
@@ -72,7 +73,10 @@ class App extends Component {
                 <CartBag currency={this.state.currencySymbol} />
               </Route>
               <Route path="/products/:productId">
-                <PDP currency={this.state.currencySymbol} />
+                <PDP
+                  currency={this.state.currencySymbol}
+                  products={this.context.products}
+                />
               </Route>
               <Route path="*">
                 <UsersUsefullInfo>Page no found</UsersUsefullInfo>

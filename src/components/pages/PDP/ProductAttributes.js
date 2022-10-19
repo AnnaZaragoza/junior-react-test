@@ -7,23 +7,55 @@ class ProductAttributes extends Component {
   constructor() {
     super();
     this.state = {
-      isClicked: true,
+      attributes: [],
     };
   }
 
-  changeBackgroundColorHandler() {
-    this.setState({ isClicked: false });
+  componentDidMount() {
+    let array = [];
+    let itemArray = [];
+
+    this.props.attributes.map((item, index) => {
+      if (item.type != "swatch") {
+        array.push({
+          id: item.id,
+          name: item.name,
+          type: item.type,
+        });
+        item.items.forEach((element) => {
+          itemArray.push({
+            isChecked: false,
+            displayValue: element.displayValue,
+            id: element.id,
+          });
+          array[index].items = itemArray;
+        });
+      }
+    });
+
+    this.setState({
+      attributes: array,
+    });
+  }
+
+  changeBackgroundColorHandler(attributeIndex, itemIndex) {
+    let array = [...this.state.attributes];
+
+    array[attributeIndex].items.forEach((item, index) => {
+      if (index != itemIndex) {
+        item.isChecked = false;
+      }
+    });
+
+    array[attributeIndex].items[itemIndex].isChecked = true;
+
+    this.setState({ attributes: array });
   }
 
   render() {
-    // Check the type of attribute (NO SWATCH)
-    const checkedTypes = this.props.attributes.filter(
-      (a) => a.type !== "swatch"
-    );
-
     // Attributes to be displayed (NO SWATCH)
-    const attributes = checkedTypes.map(
-      (a) =>
+    const attributes = this.state.attributes.map(
+      (a, attributeIndex) =>
         (a = (
           <li
             className={`${this.props.className} ${styles.attribute} `}
@@ -32,14 +64,19 @@ class ProductAttributes extends Component {
             <h3 className={styles.title}>{a.name.toUpperCase()}:</h3>
             <ul className={styles.list}>
               {a.items.map(
-                (item) =>
+                (item, itemIndex) =>
                   (item = (
                     <li key={item.id}>
                       <button
                         className={`${styles.button} ${
-                          !this.state.isClicked ? `${styles.clicked}` : ""
+                          item.isChecked ? `${styles.clicked}` : ""
                         }`}
-                        onClick={this.changeBackgroundColorHandler.bind(this)}
+                        onClick={() =>
+                          this.changeBackgroundColorHandler(
+                            attributeIndex,
+                            itemIndex
+                          )
+                        }
                       >
                         {item.displayValue}
                       </button>

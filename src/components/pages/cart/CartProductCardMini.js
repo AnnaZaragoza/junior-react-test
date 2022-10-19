@@ -1,4 +1,5 @@
 import { Component } from "react";
+import ProductContext from "../../../store/product-context";
 
 import ButtonSecondary from "../../../UI/ButtonSecondary";
 import ProductAttributes from "../PDP/ProductAttributes";
@@ -7,70 +8,72 @@ import ProductColorAttribute from "../PDP/ProductColorAttribute";
 import styles from "./CartProductCardMini.module.css";
 
 class CartProductCardMini extends Component {
+  static contextType = ProductContext;
+
   constructor() {
     super();
     this.state = {
-      productAmount: 1,
-      priceAmount: 0,
+      productQuantityCounter: 1,
+      productCurrentPrice: 0,
+      productPrice: 0,
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.productAmount !== this.state.productAmount) {
-      if (prevState.productAmount < this.state.productAmount) {
-        let increasedPriceAmount =
-          this.state.priceAmount === 0
-            ? this.props.priceAmount
-            : this.state.priceAmount;
-        increasedPriceAmount += this.props.priceAmount;
-        increasedPriceAmount.toFixed(2); // not working?!
-        this.setState({ priceAmount: increasedPriceAmount });
-      }
+  componentDidMount() {
+    // Checking the current price
+    const actualProductCurrentPrice = Number(
+      this.props.prices.find(
+        (price) => price.currency.symbol === this.props.priceCurrencySymbol
+      ).amount
+    ).toFixed(2);
 
-      if (prevState.productAmount >= this.state.productAmount) {
-        console.log(prevState);
-
-        let decreasedPriceAmount =
-          this.state.priceAmount === 0
-            ? this.props.priceAmount
-            : this.state.priceAmount;
-        decreasedPriceAmount -= this.props.priceAmount;
-        this.setState({ priceAmount: decreasedPriceAmount });
-      }
-    }
-  }
-
-  increaseProductAmountHandler() {
-    const increasedAmount = this.state.productAmount + 1;
     this.setState({
-      productAmount: increasedAmount,
+      productCurrentPrice: actualProductCurrentPrice,
+      productPrice: actualProductCurrentPrice,
     });
   }
 
-  decreaseProductAmountHandler(e) {
-    const decreasedAmount = this.state.productAmount - 1;
-    if (this.state.productAmount < 1) return; // Remove item from cartOverlay
-    this.setState({ productAmount: decreasedAmount });
+  increaseProductAmountHandler() {
+    let increaseQuantityCounter = this.state.productQuantityCounter + 1;
+    let increasedAmount = this.state.productPrice * increaseQuantityCounter;
+
+    this.setState({
+      productCurrentPrice: increasedAmount,
+      productQuantityCounter: increaseQuantityCounter,
+    });
+
+    // To cartOverlay - amount and single price (to be added to total amount)
+    this.props.onGetNewProductPrice(this.state.productPrice);
+
+    // Update cartItems in ProductContext
+    this.context.updateCartItem({
+      id: this.props.id,
+      amount: this.state.productQuantityCounter,
+      price: this.state.productPrice,
+    });
   }
 
-  increasePriceAmountHandler() {
-    let increasedPriceAmount = this.props.priceAmount;
-    increasedPriceAmount += this.props.priceAmount;
-    this.setState({ priceAmount: increasedPriceAmount });
-  }
+  decreaseProductAmountHandler() {
+    let decreaseQuantityCounter = this.state.productQuantityCounter - 1;
+    let decreasedAmount = this.state.productPrice * decreaseQuantityCounter;
 
-  decreasePriceAmountHandler() {
-    let decreasedPriceAmount = this.props.priceAmount;
-    decreasedPriceAmount += this.props.priceAmount;
-    this.setState({ priceAmount: decreasedPriceAmount });
+    // Remove item from cartOverlay
+    if (this.state.productQuantityCounter === 1) {
+      this.context.removeCartItem({
+        id: this.props.id,
+      });
+    }
+
+    this.setState({
+      productCurrentPrice: decreasedAmount,
+      productQuantityCounter: decreaseQuantityCounter,
+    });
+
+    // To cartOverlay - amount and single price (to be added to total amount)
+    this.props.onGetNewProductPrice(-Math.abs(this.state.productPrice));
   }
 
   render() {
-    const priceAmount =
-      this.state.priceAmount === 0
-        ? this.props.priceAmount
-        : this.state.priceAmount;
-
     return (
       <li className={styles.item}>
         <div className={styles["item-description"]}>
@@ -78,7 +81,7 @@ class CartProductCardMini extends Component {
           <h4 className={styles["title-description"]}>{this.props.brand}</h4>
           <p className={styles.price}>
             {this.props.priceCurrencySymbol}
-            {priceAmount}
+            {this.props.price}
           </p>
           <ul>
             <ProductAttributes
@@ -99,7 +102,7 @@ class CartProductCardMini extends Component {
             >
               +
             </ButtonSecondary>
-            <span>{this.state.productAmount}</span>
+            <span>{this.props.amount}</span>
             <ButtonSecondary
               className={styles["item-button"]}
               onClick={this.decreaseProductAmountHandler.bind(this)}

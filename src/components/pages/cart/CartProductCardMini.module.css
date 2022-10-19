@@ -71,7 +71,21 @@ span {
 }
 
 .item-image {
+  object-fit: contain;
   width: 121px;
-  height: auto;
-  border: 1px solid lightgrey;
+  height: fit-content;
+  margin: auto;
 }
+
+/* .attributes h3 {
+  font-family: var(--f-primary);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.attributes li>button {
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  font-size: 14px;
+} */

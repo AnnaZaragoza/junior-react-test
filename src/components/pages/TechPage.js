@@ -2,10 +2,13 @@ import { Component } from "react";
 
 import PLP from "./PLP/PLP";
 import UsersUsefullInfo from "../../UI/UsersUsefullInfo";
+import ProductsContext from "../../store/products-context";
 
 class TechPage extends Component {
+  static contextType = ProductsContext;
+
   render() {
-    const techItems = JSON.parse(localStorage.getItem("products")).filter(
+    const techItems = this.context.products.filter(
       (i) => i.category === "tech"
     );
 

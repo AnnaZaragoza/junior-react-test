@@ -13,12 +13,6 @@ class PLP extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   const defaultPriceAmounts = this.props.products.map((p) => p.priceAmount);
-
-  //   this.setState({ priceAmounts: defaultPriceAmounts });
-  // }
-
   componentDidUpdate(prevProps) {
     if (prevProps.currency !== this.props.currency) {
       // Extract amounts and currency symbols

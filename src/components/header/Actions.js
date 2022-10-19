@@ -19,7 +19,9 @@ class Actions extends Component {
   }
 
   showCurrencyListHandler() {
-    this.setState({ currencyListIsShown: true });
+    if (this.state.currencyListIsShown === false)
+      this.setState({ currencyListIsShown: true });
+    else this.setState({ currencyListIsShown: false });
   }
 
   hideCurrencyListAndAddCurrrencyHandler(e) {

@@ -66,7 +66,6 @@ class ProductsProvider extends Component {
           images: pData.gallery,
           title: pData.name,
           prices: pData.prices,
-          priceAmount: pData.prices[0].amount,
           category: pData.category,
           brand: pData.brand,
           description: pData.description,

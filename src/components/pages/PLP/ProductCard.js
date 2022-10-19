@@ -14,31 +14,8 @@ class ProductCard extends Component {
     super();
     this.state = {
       cartBadgeButtonIsShown: false,
-      newProductAmount: "",
       newPriceAmount: "",
     };
-  }
-
-  componentDidUpdate(prevProps) {
-    // Checking for product stock
-
-    // Checking the actual currency
-    if (prevProps.priceCurrencySymbol !== this.props.priceCurrencySymbol) {
-      // Extract amounts and currency symbols from store
-      const amounts = this.props.prices.map((p) => p.amount);
-      const symbols = this.props.prices
-        .map((p) => p.currency)
-        .map((c) => c.symbol);
-
-      // Find the current symbol from app (actions)
-      const indexCurrentSymbol = symbols.indexOf(
-        this.props.priceCurrencySymbol
-      );
-
-      // Find the proper amount
-      const correspondedAmount = amounts[indexCurrentSymbol];
-      this.setState({ newPriceAmount: correspondedAmount });
-    }
   }
 
   showCartBadgeButtonHandler() {
@@ -53,23 +30,26 @@ class ProductCard extends Component {
       id: this.props.id,
       item: this.props.title,
       image: this.props.image,
-      priceCurrencySymbol: this.props.priceCurrencySymbol,
-      price:
-        this.state.newPriceAmount === ""
-          ? this.props.priceAmount
-          : this.state.newPriceAmount,
-      amount: this.props.amount,
+      images: this.props.images,
       brand: this.props.brand,
       description: this.props.description,
       attributes: this.props.attributes,
       category: this.props.category,
       prices: this.props.prices,
+      //////////////////////////////////////////////
+      amount: 1,
+      price: this.props.prices.find(
+        (price) => price.currency.symbol === this.props.priceCurrencySymbol
+      ).amount,
     });
   }
 
   render() {
     const isInStock = this.props.inStock === true;
     const isNotInStock = this.props.inStock === false;
+    const productCurrentPrice = this.props.prices.find(
+      (price) => price.currency.symbol === this.props.priceCurrencySymbol
+    ).amount;
 
     return (
       <li
@@ -90,9 +70,7 @@ class ProductCard extends Component {
               <h4 className={styles.title}>{this.props.title}</h4>
               <p className={styles.price}>
                 {this.props.priceCurrencySymbol}
-                {this.state.newPriceAmount === ""
-                  ? this.props.priceAmount
-                  : this.state.newPriceAmount}
+                {productCurrentPrice}
               </p>
             </div>
           </NavLink>
@@ -119,9 +97,7 @@ class ProductCard extends Component {
               <h4 className={styles.title}>{this.props.title}</h4>
               <p className={styles.price}>
                 {this.props.priceCurrencySymbol}
-                {this.state.newPriceAmount === ""
-                  ? this.props.priceAmount
-                  : this.state.newPriceAmount}
+                {productCurrentPrice}
               </p>
             </div>
           </NavLink>

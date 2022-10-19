@@ -2,10 +2,13 @@ import { Component } from "react";
 
 import PLP from "./PLP/PLP";
 import UsersUsefullInfo from "../../UI/UsersUsefullInfo";
+import ProductsContext from "../../store/products-context";
 
 class ClothesPage extends Component {
+  static contextType = ProductsContext;
+
   render() {
-    const clothesItems = JSON.parse(localStorage.getItem("products")).filter(
+    const clothesItems = this.context.products.filter(
       (i) => i.category === "clothes"
     );
 

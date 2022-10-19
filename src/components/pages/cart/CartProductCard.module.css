@@ -41,6 +41,10 @@
   margin: 20px 0;
 }
 
+.attributes {
+  margin-bottom: 16px;
+}
+
 .item-rest {
   display: flex;
   gap: 24px;
@@ -62,12 +66,6 @@
 
 span {
   text-align: center;
-}
-
-.item-image {
-  width: 200px;
-  height: 288px;
-  margin: 24px 0;
 }
 
 hr {

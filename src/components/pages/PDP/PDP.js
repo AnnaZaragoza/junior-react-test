@@ -22,14 +22,13 @@ class PDP extends Component {
       brand: "",
       attributes: [],
       priceCurrencySymbol: "",
-      price: "",
       description: "",
       images: [],
     };
   }
 
   componentDidMount() {
-    // get the products from LS
+    // Get the products from LS
     const items = JSON.parse(localStorage.getItem("products"));
     const item = items.find((p) => p.id === this.props.match.params.productId);
 
@@ -41,7 +40,6 @@ class PDP extends Component {
       brand: item.brand,
       attributes: item.attributes,
       priceCurrencySymbol: this.props.currency,
-      price: item.priceAmount,
       description: item.description,
       images: item.images,
     });
@@ -54,8 +52,6 @@ class PDP extends Component {
       item: this.state.title,
       image: this.state.images[0],
       priceCurrencySymbol: this.state.priceCurrencySymbol,
-      price: this.state.price,
-      amount: 1,
       brand: this.state.brand,
       description: this.state.description,
       attributes: this.state.attributes,

@@ -17,7 +17,7 @@ class Overlay extends Component {
 
 class Modal extends Component {
   render() {
-    const portal = document.getElementById("overlays");
+    const portal = document.getElementById("overlays"); // use ref (refs and the DOM)
 
     return (
       <Fragment>

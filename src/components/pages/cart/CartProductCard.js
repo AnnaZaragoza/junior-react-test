@@ -1,17 +1,35 @@
 import { Component, Fragment } from "react";
 
+import ProductContext from "../../../store/product-context";
 import ButtonSecondary from "../../../UI/ButtonSecondary";
 import ProductAttributes from "../PDP/ProductAttributes";
 import ProductColorAttribute from "../PDP/ProductColorAttribute";
+import ImageSlider from "../../../UI/ImageSlider";
 import styles from "./CartProductCard.module.css";
 
 class CartProductCard extends Component {
+  static contextType = ProductContext;
+
   constructor() {
     super();
     this.state = {
+      slides: [],
       productAmount: 1,
       priceAmount: 0,
     };
+  }
+
+  componentDidMount() {
+    let itemsWithPictures = [];
+
+    this.context.cartItems.map((item, index) => {
+      itemsWithPictures.push({ id: item.id });
+      let pictures = [];
+      item.images.forEach((img) => pictures.push(img));
+      itemsWithPictures[index].images = pictures;
+    });
+
+    this.setState({ slides: itemsWithPictures });
   }
 
   increaseProductAmountHandler() {
@@ -23,7 +41,7 @@ class CartProductCard extends Component {
 
   decreaseProductAmountHandler(e) {
     const decreasedAmount = this.state.productAmount - 1;
-    if (this.state.productAmount < 1) return; // Remove item from cartOverlay
+    if (this.state.productAmount < 1) return; // Remove item from cartOverlay -do the same I did for adding a new product in cartItems (from PLP - cardProduct)
     this.setState({ productAmount: decreasedAmount });
   }
 
@@ -39,15 +57,9 @@ class CartProductCard extends Component {
               {this.props.priceCurrencySymbol}
               {/* {priceAmount} */}
             </p>
-            <ul>
-              <ProductAttributes
-                className={styles.attributes}
-                attributes={this.props.attributes}
-              />
-              <ProductColorAttribute
-                className={styles.attributes}
-                attributes={this.props.attributes}
-              />
+            <ul className={styles.attributes}>
+              <ProductAttributes attributes={this.props.attributes} />
+              <ProductColorAttribute attributes={this.props.attributes} />
             </ul>
           </div>
           <div className={styles["item-rest"]}>
@@ -66,11 +78,7 @@ class CartProductCard extends Component {
                 -
               </ButtonSecondary>
             </div>
-            <img
-              className={styles["item-image"]}
-              src={this.props.image}
-              alt={this.props.title}
-            ></img>
+            <ImageSlider slides={this.state.slides} />
           </div>
         </li>
       </Fragment>
