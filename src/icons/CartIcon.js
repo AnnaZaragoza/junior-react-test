@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component } from 'react';
 
 class CartIcon extends Component {
   render() {
@@ -6,7 +6,7 @@ class CartIcon extends Component {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
-        height="19"
+        height="17"
         viewBox="0 0 20 19"
         className={this.props.className}
       >

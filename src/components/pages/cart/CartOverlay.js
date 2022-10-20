@@ -32,6 +32,12 @@ class CartOverlay extends Component {
     window.addEventListener("scroll", this.hideModalHandler.bind(this));
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.context.cartItems.length === 0 && prevState.cartHasItems) {
+      this.setState({ cartHasItems: false });
+    }
+  }
+
   hideModalHandler() {
     if (window.scrollY > 0) this.setState({ modalIsShown: false });
     else this.setState({ modalIsShown: true });

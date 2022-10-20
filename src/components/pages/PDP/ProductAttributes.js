@@ -16,21 +16,26 @@ class ProductAttributes extends Component {
     let itemArray = [];
 
     this.props.attributes.map((item, index) => {
-      if (item.type != "swatch") {
-        array.push({
-          id: item.id,
-          name: item.name,
-          type: item.type,
-        });
-        item.items.forEach((element) => {
-          itemArray.push({
-            isChecked: false,
-            displayValue: element.displayValue,
-            id: element.id,
-          });
-          array[index].items = itemArray;
-        });
+      if (item.type === "swatch") {
+        array.push(null);
+        return;
       }
+
+      array.push({
+        id: item.id,
+        name: item.name,
+        type: item.type,
+      });
+
+      item.items.forEach((element) => {
+        itemArray.push({
+          isChecked: false,
+          displayValue: element.displayValue,
+          id: element.id,
+        });
+
+        array[index].items = itemArray;
+      });
     });
 
     this.setState({
@@ -56,7 +61,7 @@ class ProductAttributes extends Component {
     // Attributes to be displayed (NO SWATCH)
     const attributes = this.state.attributes.map(
       (a, attributeIndex) =>
-        (a = (
+        a && (
           <li
             className={`${this.props.className} ${styles.attribute} `}
             key={a.id}
@@ -85,7 +90,7 @@ class ProductAttributes extends Component {
               )}
             </ul>
           </li>
-        ))
+        )
     );
 
     return <Fragment>{attributes}</Fragment>;
