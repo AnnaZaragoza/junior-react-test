@@ -1,5 +1,5 @@
-import { Component } from "react";
-import ProductContext from "./product-context";
+import { Component } from 'react';
+import ProductContext from './product-context';
 
 class ProductProvider extends Component {
   constructor() {
@@ -14,13 +14,10 @@ class ProductProvider extends Component {
 
   addCartItemToCartHandler(cartItem) {
     // Total amount
-    const updatedCartTotalAmount =
-      this.state.cartTotalAmount + cartItem.price * cartItem.amount;
+    const updatedCartTotalAmount = this.state.cartTotalAmount + cartItem.price * cartItem.amount;
 
     // CartItems
-    const existingCartItemIndex = this.state.cartItems.findIndex(
-      (i) => i.id === cartItem.id
-    );
+    const existingCartItemIndex = this.state.cartItems.findIndex((i) => i.id === cartItem.id);
     const existingCartItem = this.state.cartItems[existingCartItemIndex];
 
     let updatedCartItems;
@@ -41,20 +38,18 @@ class ProductProvider extends Component {
 
     console.log(updatedCartItems);
     // Save the data in local storage
-    localStorage.setItem("cartProducts", JSON.stringify(updatedCartItems));
+    localStorage.setItem('cartProducts', JSON.stringify(updatedCartItems));
+    // Save changed total amount in LS
+    localStorage.setItem('cartTotalAmount', JSON.stringify(updatedCartTotalAmount));
   }
 
   removeCartItemFromCartHandler(cartItem) {
-    const existingCartItemIndex = this.state.cartItems.findIndex(
-      (i) => i.id === cartItem.id
-    );
+    const existingCartItemIndex = this.state.cartItems.findIndex((i) => i.id === cartItem.id);
     const existingCartItem = this.state.cartItems[existingCartItemIndex];
 
     let updatedCartItems;
     if (existingCartItem) {
-      updatedCartItems = this.state.cartItems.filter(
-        (i) => i.id !== cartItem.id
-      );
+      updatedCartItems = this.state.cartItems.filter((i) => i.id !== cartItem.id);
     } else {
       const updatedCartItem = {
         ...existingCartItem,
@@ -63,8 +58,7 @@ class ProductProvider extends Component {
       updatedCartItems[existingCartItemIndex] = updatedCartItem;
     }
 
-    const updatedCartTotalAmount =
-      this.state.cartTotalAmount - existingCartItem.price;
+    const updatedCartTotalAmount = this.state.cartTotalAmount - existingCartItem.price;
 
     this.setState({
       cartItems: updatedCartItems,
@@ -73,16 +67,16 @@ class ProductProvider extends Component {
 
     console.log(updatedCartItems);
     // Save the data in local storage
-    localStorage.setItem("cartProducts", JSON.stringify(updatedCartItems));
+    localStorage.setItem('cartProducts', JSON.stringify(updatedCartItems));
   }
 
   updateCartItemFromCartHandler(cartItem) {
-    const currentAmount = cartItem.amount + 1;
+    let currentAmount;
+    if (cartItem.amount > 0) currentAmount = cartItem.amount + 1;
+    else if (cartItem.amount < 0) currentAmount = Math.abs(cartItem.amount) - 1;
     const currentPrice = cartItem.price * currentAmount;
 
-    const existingCartItemIndex = this.state.cartItems.findIndex(
-      (i) => i.id === cartItem.id
-    );
+    const existingCartItemIndex = this.state.cartItems.findIndex((i) => i.id === cartItem.id);
     const existingCartItem = this.state.cartItems[existingCartItemIndex];
 
     let updatedCartItems;
@@ -102,7 +96,7 @@ class ProductProvider extends Component {
 
     console.log(updatedCartItems);
     // Save the data in local storage
-    localStorage.setItem("cartProducts", JSON.stringify(updatedCartItems));
+    localStorage.setItem('cartProducts', JSON.stringify(updatedCartItems));
   }
 
   render() {
@@ -114,11 +108,7 @@ class ProductProvider extends Component {
       updateCartItem: this.updateCartItemFromCartHandler.bind(this),
     };
 
-    return (
-      <ProductContext.Provider value={productContext}>
-        {this.props.children}
-      </ProductContext.Provider>
-    );
+    return <ProductContext.Provider value={productContext}>{this.props.children}</ProductContext.Provider>;
   }
 }
 

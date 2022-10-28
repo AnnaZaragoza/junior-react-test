@@ -77,15 +77,13 @@ span {
   margin: auto;
 }
 
-/* .attributes h3 {
+.attributes h3 {
   font-family: var(--f-primary);
   font-size: 14px;
   font-weight: 400;
 }
 
-.attributes li>button {
-  height: 24px;
-  width: 24px;
-  padding: 0;
+.attributes li > button {
+  padding: 5px;
   font-size: 14px;
-} */
+}

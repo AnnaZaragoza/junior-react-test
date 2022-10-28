@@ -1,9 +1,12 @@
-import { Component } from "react";
+import { Component } from 'react';
+import ProductContext from '../store/product-context';
 
-import styles from "./ImageSlider.module.css";
+import styles from './ImageSlider.module.css';
 // import { v4 as uuidv4 } from "uuid";
 
 class ImageSlider extends Component {
+  static contextType = ProductContext;
+
   constructor() {
     super();
     this.state = {
@@ -26,8 +29,7 @@ class ImageSlider extends Component {
   }
 
   goToNext() {
-    const isLastSlide =
-      this.state.currentIndex === this.props.slides[0].images.length - 1;
+    const isLastSlide = this.state.currentIndex === this.props.slides[0].images.length - 1;
 
     if (isLastSlide) {
       this.setState({ currentIndex: 0 });
@@ -56,16 +58,10 @@ class ImageSlider extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.arrows}>
-          <button
-            className={styles["arrow-left"]}
-            onClick={this.goToPrevious.bind(this)}
-          >
+          <button className={styles['arrow-left']} onClick={this.goToPrevious.bind(this)}>
             &lt;
           </button>
-          <button
-            className={styles["arrow-right"]}
-            onClick={this.goToNext.bind(this)}
-          >
+          <button className={styles['arrow-right']} onClick={this.goToNext.bind(this)}>
             &gt;
           </button>
         </div>

@@ -1,7 +1,7 @@
-import { Component, Fragment } from "react";
-import { withRouter } from "react-router-dom";
+import { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import styles from "./ProductAttributes.module.css";
+import styles from './ProductAttributes.module.css';
 
 class ProductAttributes extends Component {
   constructor() {
@@ -16,7 +16,7 @@ class ProductAttributes extends Component {
     let itemArray = [];
 
     this.props.attributes.map((item, index) => {
-      if (item.type === "swatch") {
+      if (item.type === 'swatch') {
         array.push(null);
         return;
       }
@@ -62,26 +62,16 @@ class ProductAttributes extends Component {
     const attributes = this.state.attributes.map(
       (a, attributeIndex) =>
         a && (
-          <li
-            className={`${this.props.className} ${styles.attribute} `}
-            key={a.id}
-          >
-            <h3 className={styles.title}>{a.name.toUpperCase()}:</h3>
+          <li className={`${this.props.className} ${styles.attribute} `} key={a.id}>
+            <h3 className={styles.title}>{a.name}:</h3>
             <ul className={styles.list}>
               {a.items.map(
                 (item, itemIndex) =>
                   (item = (
                     <li key={item.id}>
                       <button
-                        className={`${styles.button} ${
-                          item.isChecked ? `${styles.clicked}` : ""
-                        }`}
-                        onClick={() =>
-                          this.changeBackgroundColorHandler(
-                            attributeIndex,
-                            itemIndex
-                          )
-                        }
+                        className={`${styles.button} ${item.isChecked ? `${styles.clicked}` : ''}`}
+                        onClick={() => this.changeBackgroundColorHandler(attributeIndex, itemIndex)}
                       >
                         {item.displayValue}
                       </button>

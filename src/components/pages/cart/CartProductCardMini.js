@@ -1,11 +1,11 @@
-import { Component } from "react";
-import ProductContext from "../../../store/product-context";
+import { Component } from 'react';
+import ProductContext from '../../../store/product-context';
 
-import ButtonSecondary from "../../../UI/ButtonSecondary";
-import ProductAttributes from "../PDP/ProductAttributes";
-import ProductColorAttribute from "../PDP/ProductColorAttribute";
+import ButtonSecondary from '../../../UI/ButtonSecondary';
+import ProductAttributes from '../PDP/ProductAttributes';
+import ProductColorAttribute from '../PDP/ProductColorAttribute';
 
-import styles from "./CartProductCardMini.module.css";
+import styles from './CartProductCardMini.module.css';
 
 class CartProductCardMini extends Component {
   static contextType = ProductContext;
@@ -21,12 +21,9 @@ class CartProductCardMini extends Component {
 
   componentDidMount() {
     // Checking the current price
-    const actualProductCurrentPrice = Number(
-      this.props.prices.find(
-        (price) => price.currency.symbol === this.props.priceCurrencySymbol
-      ).amount
-    ).toFixed(2);
-
+    const actualProductCurrentPrice = this.props.prices.find(
+      (price) => price.currency.symbol === this.props.priceCurrencySymbol
+    ).amount;
     this.setState({
       productCurrentPrice: actualProductCurrentPrice,
       productPrice: actualProductCurrentPrice,
@@ -42,7 +39,7 @@ class CartProductCardMini extends Component {
       productQuantityCounter: increaseQuantityCounter,
     });
 
-    // To cartOverlay - amount and single price (to be added to total amount)
+    // To cartOverlay - single price (to be added to total amount)
     this.props.onGetNewProductPrice(this.state.productPrice);
 
     // Update cartItems in ProductContext
@@ -57,65 +54,56 @@ class CartProductCardMini extends Component {
     let decreaseQuantityCounter = this.state.productQuantityCounter - 1;
     let decreasedAmount = this.state.productPrice * decreaseQuantityCounter;
 
+    this.setState({
+      productCurrentPrice: decreasedAmount,
+      productQuantityCounter: decreaseQuantityCounter,
+    });
+
+    // To cartOverlay - single price (to be added to total amount)
+    this.props.onGetNewProductPrice(-Math.abs(this.state.productPrice));
+
+    // Update cartItems in ProductContext
+    this.context.updateCartItem({
+      id: this.props.id,
+      amount: -Math.abs(this.state.productQuantityCounter),
+      price: this.state.productPrice,
+    });
+
     // Remove item from cartOverlay
     if (this.state.productQuantityCounter === 1) {
       this.context.removeCartItem({
         id: this.props.id,
       });
     }
-
-    this.setState({
-      productCurrentPrice: decreasedAmount,
-      productQuantityCounter: decreaseQuantityCounter,
-    });
-
-    // To cartOverlay - amount and single price (to be added to total amount)
-    this.props.onGetNewProductPrice(-Math.abs(this.state.productPrice));
   }
 
   render() {
     return (
       <li className={styles.item}>
-        <div className={styles["item-description"]}>
+        <div className={styles['item-description']}>
           <h3 className={styles.title}>{this.props.title}</h3>
-          <h4 className={styles["title-description"]}>{this.props.brand}</h4>
+          <h4 className={styles['title-description']}>{this.props.brand}</h4>
           <p className={styles.price}>
             {this.props.priceCurrencySymbol}
             {this.props.price}
           </p>
           <ul>
-            <ProductAttributes
-              className={styles.attributes}
-              attributes={this.props.attributes}
-            />
-            <ProductColorAttribute
-              className={styles.attributes}
-              attributes={this.props.attributes}
-            />
+            <ProductAttributes className={styles.attributes} attributes={this.props.attributes} />
+            <ProductColorAttribute className={styles.attributes} attributes={this.props.attributes} />
           </ul>
         </div>
-        <div className={styles["item-rest"]}>
-          <div className={styles["item-amount"]}>
-            <ButtonSecondary
-              className={styles["item-button"]}
-              onClick={this.increaseProductAmountHandler.bind(this)}
-            >
+        <div className={styles['item-rest']}>
+          <div className={styles['item-amount']}>
+            <ButtonSecondary className={styles['item-button']} onClick={this.increaseProductAmountHandler.bind(this)}>
               +
             </ButtonSecondary>
             <span>{this.props.amount}</span>
-            <ButtonSecondary
-              className={styles["item-button"]}
-              onClick={this.decreaseProductAmountHandler.bind(this)}
-            >
+            <ButtonSecondary className={styles['item-button']} onClick={this.decreaseProductAmountHandler.bind(this)}>
               -
             </ButtonSecondary>
           </div>
 
-          <img
-            className={styles["item-image"]}
-            src={this.props.image}
-            alt={this.props.title}
-          ></img>
+          <img className={styles['item-image']} src={this.props.image} alt={this.props.title}></img>
         </div>
       </li>
     );

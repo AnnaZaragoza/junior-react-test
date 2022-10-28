@@ -1,12 +1,12 @@
-import { Component, Fragment } from "react";
-import { NavLink } from "react-router-dom";
+import { Component, Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import Modal from "../../../UI/Modal";
-import ProductContext from "../../../store/product-context";
-import CartProductCardMini from "./CartProductCardMini";
-import Button from "../../../UI/Button";
+import Modal from '../../../UI/Modal';
+import ProductContext from '../../../store/product-context';
+import CartProductCardMini from './CartProductCardMini';
+import Button from '../../../UI/Button';
 
-import styles from "./CartOverlay.module.css";
+import styles from './CartOverlay.module.css';
 
 class CartOverlay extends Component {
   static contextType = ProductContext;
@@ -29,7 +29,7 @@ class CartOverlay extends Component {
     });
 
     // Make the component desappear on scroll down
-    window.addEventListener("scroll", this.hideModalHandler.bind(this));
+    window.addEventListener('scroll', this.hideModalHandler.bind(this));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -44,12 +44,14 @@ class CartOverlay extends Component {
   }
 
   changeTotalAmountHandler(price) {
-    const updatedCartTotalAmount =
-      Number(this.state.totalAmount) + Number(price);
+    const updatedCartTotalAmount = this.state.totalAmount + price;
 
     this.setState({
-      totalAmount: Number(updatedCartTotalAmount).toFixed(2),
+      totalAmount: updatedCartTotalAmount,
     });
+
+    // Save changed total amount in LS
+    localStorage.setItem('cartTotalAmount', JSON.stringify(updatedCartTotalAmount));
   }
 
   render() {
@@ -74,6 +76,8 @@ class CartOverlay extends Component {
         ))
     );
 
+    const savedTotalAmount = JSON.parse(localStorage.getItem('cartTotalAmount'));
+
     return (
       <Fragment>
         {this.state.modalIsShown && (
@@ -87,15 +91,11 @@ class CartOverlay extends Component {
                   <span>Total Amount</span>
                   <span>
                     {this.props.currency}
-                    {this.state.totalAmount}
+                    {savedTotalAmount}
                   </span>
                 </div>
                 <div className={styles.actions}>
-                  <NavLink
-                    className={styles.button}
-                    to={"/products/cart-bag"}
-                    onClick={this.props.onClose}
-                  >
+                  <NavLink className={styles.button} to={'/products/cart-bag'} onClick={this.props.onClose}>
                     VIEW BAG
                   </NavLink>
                   <Button onClick={this.props.onClose}>CHECK OUT</Button>
