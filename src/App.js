@@ -24,7 +24,6 @@ class App extends Component {
     this.state = {
       cartIsShown: false,
       currencySymbol: "$",
-      hello:"",
     };
   }
 
